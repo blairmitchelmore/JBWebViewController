@@ -338,7 +338,11 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    return true;
+    if (self.delegate) {
+        return [self.delegate webController:self shouldStartLoadWithRequest:request navigationType:navigationType];
+    } else {
+        return true;
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

@@ -16,6 +16,12 @@
 #import <NJKWebViewProgress/NJKWebViewProgress.h>
 #import <NJKWebViewProgress/NJKWebViewProgressView.h>
 
+@class JBWebViewController;
+
+@protocol JBWebViewControllerDelegate <NSObject>
+- (BOOL)webController:(JBWebViewController *)controller shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+@end
+
 @interface JBWebViewController : UIViewController <UIWebViewDelegate, NJKWebViewProgressDelegate>
 
 // Typedef for completion block
@@ -23,6 +29,7 @@ typedef void (^completion)(JBWebViewController *controller);
 
 // Loding string
 @property (nonatomic, strong) NSString *loadingString;
+@property (nonatomic, weak) id <JBWebViewControllerDelegate> delegate;
 
 // Public header methods
 - (id)initWithUrl:(NSURL *)url;
